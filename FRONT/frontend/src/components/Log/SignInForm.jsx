@@ -8,8 +8,6 @@ const SignInForm = () => {
 
   const handleLogin = (e) => {
     e.preventDefault()
-    // const emailError = document.useRef('.email.error')
-    // const passwordError = document.useRef('.password.error')
     const emailError = document.querySelector('.email.error')
     const passwordError = document.querySelector('.password.error')
 
