@@ -10,7 +10,12 @@ Données de connexion sécurisées. L'application étant responsive.
 - **BACKEND :** MongoDB, Express & Node
 - **FRONTEND :** React
 
-## Lancement de l'application
+## Installation & Lancement de l'application
+
+### Pré-requis
+- Node.js 
+- Yarn
+
 -BACKEND : "cd backend" puis : "nodemon server"
 
 -FRONTEND : "cd frontend" puis : "npm start" ou "yarn start" 
