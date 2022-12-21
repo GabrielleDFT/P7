@@ -7,7 +7,7 @@ Le département RH de Groupomania a laissé libre cours à son imagination pour 
 Données de connexion sécurisées. L'application étant responsive.
 
 ## Technologies utilisées - M.E.R.N.
-- **BACKEND :** MongoDB, Express & Node
+- **BACKEND :** MongoDB & MongoDB Atlas/Compass, Express & Node
 - **FRONTEND :** React
 
 ## Installation & Lancement de l'application
