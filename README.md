@@ -1,7 +1,5 @@
 # P7_Groupomania
-
-# In Terminal
-    
+ 
 ## BACKEND
 "cd backend" and : "nodemon server"
 
