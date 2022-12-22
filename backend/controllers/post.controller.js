@@ -110,6 +110,7 @@ module.exports.likePost = async (req, res) => {
             .then((data) => res.send(data))
             .catch((err) => res.status(500).send({ message: err }));
     } catch (err) {
+      if(res.headersSent !== true)//error
         return res.status(400).send(err);
     }
 };
@@ -137,6 +138,7 @@ module.exports.unlikePost = async (req, res) => {
             .then((data) => res.send(data))
             .catch((err) => res.status(500).send({ message: err }));
     } catch (err) {
+      if(res.headersSent !== true)//error
         return res.status(400).send(err);
     }
 };
