@@ -23,6 +23,5 @@ Ensuite, ouvrez votre navigateur à l'adresse suivante :  http://localhost:3000
 
 
 
-![screenshot](https://user-images.githubusercontent.com/96197835/209052880-99d26864-c485-4b20-a7c4-abb44538513b.jpg)
 
 
