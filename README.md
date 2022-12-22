@@ -21,8 +21,4 @@ Données de connexion sécurisées. L'application étant responsive.
 -FRONTEND : "cd frontend" puis : "npm start" ou "yarn start" 
 Ensuite, ouvrez votre navigateur à l'adresse suivante :  http://localhost:3000 
 
-
-
-
-
 ![Capture d’écran 2022-12-22 133855](https://user-images.githubusercontent.com/96197835/209136289-54f48d84-35f0-4594-9f52-ea821990dd8c.jpg)
