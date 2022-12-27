@@ -64,4 +64,4 @@ const Trends = () => {
   );
 };
 
-export default Trends
+export default Trends;
