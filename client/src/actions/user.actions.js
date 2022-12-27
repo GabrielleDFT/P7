@@ -79,4 +79,4 @@ export const unfollowUser = (followerId, idToUnfollow) => {
       })
       .catch((err) => console.log(err));
   };
-};
+}
