@@ -33,4 +33,4 @@ const UploadImg = () => {
   );
 };
 
-export default UploadImg
+export default UploadImg;
