@@ -42,4 +42,4 @@ const Log = ( props ) => {
   );
 };
 
-export default Log;
+export default Log;;
