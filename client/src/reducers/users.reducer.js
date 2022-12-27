@@ -7,6 +7,6 @@ export default function usersReducer(state = initialState, action) {
     case GET_USERS:
       return action.payload;
     default:
-      return state;
+      return state
   }
 }
