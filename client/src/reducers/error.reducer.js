@@ -16,6 +16,6 @@ export default function errorReducer(state = initialState, action) {
         postError: []
       }
     default: 
-      return state;
+      return state
   }
 }
