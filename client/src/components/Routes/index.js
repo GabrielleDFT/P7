@@ -9,7 +9,9 @@ import Home from '../../pages/Home'
 import Profil from '../../pages/Profil'
 import Trending from '../../pages/Trending'
 import Navbar from '../Navbar'
+import PageError from "../Routes/PageError";
 
+//--Gestion des Routes du site--
 const index = () => {
   return (
     <Router>
@@ -19,6 +21,7 @@ const index = () => {
         <Route path="/profil" element={<Profil />} />
         <Route path="/trending" element={<Trending />} />
         <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="/404" element={<PageError />} />
       </Routes>
     </Router>
   )
