@@ -124,4 +124,4 @@ const UpdateProfil = () => {
   );
 };
 
-export default UpdateProfil;
+export default UpdateProfil
