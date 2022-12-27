@@ -7,6 +7,6 @@ export default function allPostsReducer(state = initialState, action) {
     case GET_ALL_POSTS:
       return action.payload
     default: 
-      return state
+      return state;
   }
 }
