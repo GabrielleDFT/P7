@@ -42,14 +42,18 @@ const userSchema = new mongoose.Schema(
     },
     likes: {
       type: [String]
-    }
+    },
+    admin: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
   }
 );
 
-// play function before save into display: 'block',
+//--Play function before save into BDD - Hash password avec bcrypt + sel , avant sauvegarde  dans dataBase
 userSchema.pre("save", async function(next) {
   const salt = await bcrypt.genSalt();
   this.password = await bcrypt.hash(this.password, salt);
@@ -63,9 +67,9 @@ userSchema.statics.login = async function(email, password) {
     if (auth) {
       return user;
     }
-    throw Error('incorrect password');
+    throw Error('Incorrect password');
   }
-  throw Error('incorrect email')
+  throw Error('Incorrect email')
 };
 
 const UserModel = mongoose.model("user", userSchema);
