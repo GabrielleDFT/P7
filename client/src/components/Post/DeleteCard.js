@@ -8,9 +8,9 @@ const DeleteCard = (props) => {
   const deleteQuote = () => dispatch(deletePost(props.id));
 
   return (
-    <div
+    <div 
       onClick={() => {
-        if (window.confirm("Voulez-vous supprimer cet article ?")) {
+        if (window.confirm("Supprimer cet article ?")) {
           deleteQuote();
         }
       }}
