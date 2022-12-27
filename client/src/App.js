@@ -6,9 +6,11 @@ import { useDispatch } from "react-redux";
 import { getUser } from "./actions/user.actions";
 
 const App = () => {
+  //--L'id utilisateur est placé dans un useContext pour être réutilisé par la suite--
   const [uid, setUid] = useState(null);
   const dispatch = useDispatch();
 
+  //--Controle le token de l'utilisateur --
   useEffect(() => {
     const fetchToken = async () => {
       await axios({
@@ -17,6 +19,7 @@ const App = () => {
         withCredentials: true,
       })
         .then((res) => {
+          //--Récupère l'id utilisateur & le place dans la const uid--
           setUid(res.data);
         })
         .catch((err) => console.log("No token"));
