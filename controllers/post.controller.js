@@ -5,7 +5,7 @@ const { uploadErrors } = require("../utils/errors.utils");
 const ObjectID = require("mongoose").Types.ObjectId;
 const fs = require("fs");
 const { promisify } = require("util");
-const pipeline = promisify(require("stream").pipeline);
+const sharp = require("sharp");
 
 module.exports.readPost = (req, res) => {
   PostModel.find((err, docs) => {
@@ -17,12 +17,14 @@ module.exports.readPost = (req, res) => {
 module.exports.createPost = async (req, res) => {
   let fileName;
 
-  if (req.file !== null) {
+  if (req.file ) {
     try {
       if (
-        req.file.detectedMimeType != "image/jpg" &&
-        req.file.detectedMimeType != "image/png" &&
-        req.file.detectedMimeType != "image/jpeg"
+        req.file.mimetype != "image/jpg" &&
+        req.file.mimetype != "image/png" &&
+        req.file.mimetype != "image/jpeg" &&
+        req.file.mimetype != "image/gif" &&
+        req.file.mimetype != "image/webp"
       )
         throw Error("invalid file");
 
@@ -33,12 +35,9 @@ module.exports.createPost = async (req, res) => {
     }
     fileName = req.body.posterId + Date.now() + ".jpg";
 
-    await pipeline(
-      req.file.stream,
-      fs.createWriteStream(
-        `${__dirname}/../client/public/uploads/posts/${fileName}`
-      )
-    );
+    await sharp(req.file.buffer)
+      .toFile(`${__dirname}/../client/public/uploads/posts/${fileName}`
+      );
   }
 
   const newPost = new postModel({
@@ -66,7 +65,7 @@ module.exports.updatePost = (req, res) => {
     message: req.body.message,
   };
 
-  PostModel.findByIdAndUpdate(
+  PostModel.findOneAndUpdate(
     req.params.id,
     { $set: updatedRecord },
     { new: true },
@@ -92,7 +91,7 @@ module.exports.likePost = async (req, res) => {
     return res.status(400).send("ID unknown : " + req.params.id);
 
   try {
-    await PostModel.findByIdAndUpdate(
+    await PostModel.findOneAndUpdate(
       req.params.id,
       {
         $addToSet: { likers: req.body.id },
@@ -101,7 +100,7 @@ module.exports.likePost = async (req, res) => {
       .then((data) => res.send(data))
       .catch((err) => res.status(500).send({ message: err }));
 
-    await UserModel.findByIdAndUpdate(
+    await UserModel.findOneAndUpdate(
       req.body.id,
       {
         $addToSet: { likes: req.params.id },
@@ -120,7 +119,7 @@ module.exports.unlikePost = async (req, res) => {
     return res.status(400).send("ID unknown : " + req.params.id);
 
   try {
-    await PostModel.findByIdAndUpdate(
+    await PostModel.findOneAndUpdate(
       req.params.id,
       {
         $pull: { likers: req.body.id },
@@ -129,7 +128,7 @@ module.exports.unlikePost = async (req, res) => {
             .then((data) => res.send(data))
             .catch((err) => res.status(500).send({ message: err }));
 
-    await UserModel.findByIdAndUpdate(
+    await UserModel.findOneAndUpdate(
       req.body.id,
       {
         $pull: { likes: req.params.id },
@@ -148,7 +147,7 @@ module.exports.commentPost = (req, res) => {
     return res.status(400).send("ID unknown : " + req.params.id);
 
   try {
-    return PostModel.findByIdAndUpdate(
+    return PostModel.findOneAndUpdate(
       req.params.id,
       {
         $push: {
@@ -196,7 +195,7 @@ module.exports.deleteCommentPost = (req, res) => {
     return res.status(400).send("ID unknown : " + req.params.id);
 
   try {
-    return PostModel.findByIdAndUpdate(
+    return PostModel.findOneAndUpdate(
       req.params.id,
       {
         $pull: {
