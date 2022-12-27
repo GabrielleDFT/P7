@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { deleteComment, editComment } from "../../actions/post.actions";
 import { UidContext } from "../AppContext";
 
-const EditDeleteComment = ({ comment, postId }) => {
+const EditDeleteComment = ({ data, comment, postId }) => {
   const [isAuthor, setIsAuthor] = useState(false);
   const [edit, setEdit] = useState(false);
   const [text, setText] = useState("");
@@ -12,7 +12,7 @@ const EditDeleteComment = ({ comment, postId }) => {
 
   const handleEdit = (e) => {
     e.preventDefault();
-
+    //--Modification du commentaire--
     if (text) {
       dispatch(editComment(postId, comment._id, text));
       setText("");
@@ -20,19 +20,22 @@ const EditDeleteComment = ({ comment, postId }) => {
     }
   };
 
+  //--Suppression du commentaire--
   const handleDelete = () => dispatch(deleteComment(postId, comment._id));
 
   useEffect(() => {
     const checkAuthor = () => {
-      if (uid === comment.commenterId) {
+      if (uid === comment.commenterId || data.admin === true) {
         setIsAuthor(true);
       }
     };
     checkAuthor();
-  }, [uid, comment.commenterId]);
+  });
+
 
   return (
     <div className="edit-comment">
+      {/*affichage ou non selon authorisation  */}
       {isAuthor && edit === false && (
         <span onClick={() => setEdit(!edit)}>
           <img src="./img/icons/edit.svg" alt="edit-comment" />
@@ -54,7 +57,7 @@ const EditDeleteComment = ({ comment, postId }) => {
           <div className="btn">
             <span
               onClick={() => {
-                if (window.confirm("Voulez-vous supprimer ce commentaire ?")) {
+                if (window.confirm("Supprimer ce commentaire ?")) {
                   handleDelete();
                 }
               }}
@@ -70,3 +73,4 @@ const EditDeleteComment = ({ comment, postId }) => {
 };
 
 export default EditDeleteComment;
+
