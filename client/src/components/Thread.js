@@ -10,8 +10,11 @@ const Thread = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.postReducer);
 
+  //--Fonction donnant l'ordre à la BDD d'envoyer 5 posts en + arrivant en bas de la barre de scroll
   const loadMore = () => {
-    if (window.innerHeight + document.documentElement.scrollTop + 1 > document.scrollingElement.scrollHeight) {
+    if (window.innerHeight + document.documentElement.scrollTop + 1 > 
+        document.scrollingElement.scrollHeight) 
+        {
       setLoadPost(true);
     }
   }
@@ -28,6 +31,7 @@ const Thread = () => {
   }, [loadPost, dispatch, count]);
 
   return (
+    //--MAP des posts pour afficher dans le fil d'actualité--
     <div className="thread-container">
       <ul>
         {!isEmpty(posts[0]) &&
