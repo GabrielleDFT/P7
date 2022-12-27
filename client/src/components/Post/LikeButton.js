@@ -47,4 +47,4 @@ const LikeButton = ({ post }) => {
   );
 };
 
-export default LikeButton;
+export default LikeButton
