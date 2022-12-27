@@ -3,6 +3,7 @@ import Log from "../components/Log";
 import { UidContext } from "../components/AppContext";
 import UpdateProfil from "../components/Profil/UpdateProfil";
 
+//--L'uid vérifie l'identité de la personne qui veux accéder au profil--
 const Profil = () => {
   const uid = useContext(UidContext);
 
