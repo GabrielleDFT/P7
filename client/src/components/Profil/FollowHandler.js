@@ -44,4 +44,4 @@ const FollowHandler = ({ idToFollow, type }) => {
   );
 };
 
-export default FollowHandler;
+export default FollowHandler;;
