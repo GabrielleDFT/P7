@@ -29,7 +29,7 @@ module.exports.uploadProfil = async (req, res) => {
       );
     res.status(201).send("Photo de profil chargée avec succés");
   } catch (err) {
-    res.status(400).send(err)
+    res.status(400).send(err);
   }
 }
 
