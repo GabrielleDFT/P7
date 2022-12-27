@@ -8,13 +8,19 @@ import DeleteCard from "./DeleteCard";
 import CardComments from "./CardComments";
 
 const Card = ({ post }) => {
+  //--IsLoading= spinner qui se retire quand présence de la data
   const [isLoading, setIsLoading] = useState(true);
   const [isUpdated, setIsUpdated] = useState(false);
   const [textUpdate, setTextUpdate] = useState(null);
   const [showComments, setShowComments] = useState(false);
+   //--Récupération de la data Utilisateur & Autre-Utilisateur dans le store redux
   const usersData = useSelector((state) => state.usersReducer);
   const userData = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
+//--isAllowed vérifie le droit a la modification admin ou user--
+const isAllowed =
+userData && (userData._id === post.posterId || userData.admin === true);
+
 
   const updateItem = () => {
     if (textUpdate) {
@@ -29,6 +35,7 @@ const Card = ({ post }) => {
 
   return (
     <li className="card-container" key={post._id}>
+        {/*spinner de chargement */}
       {isLoading ? (
         <i className="fas fa-spinner fa-spin"></i>
       ) : (
@@ -93,11 +100,16 @@ const Card = ({ post }) => {
                 title={post._id}
               ></iframe>
             )}
-            {userData._id === post.posterId && (
+             {/* isAllowed vérifie si la personne à les droits d'accès aux modification (utilisateur / admin) */}
+             {isAllowed && (
               <div className="button-container">
-                <div onClick={() => setIsUpdated(!isUpdated)}>
-                  <img src="./img/icons/edit.svg" alt="edit" />
-                </div>
+                <button id="modify" onClick={() => setIsUpdated(!isUpdated)}>
+                  <img
+                    className="edit-delete"
+                    src="./img/editer.png"
+                    alt="Edit"
+                  />
+                </button>
                 <DeleteCard id={post._id} />
               </div>
             )}
