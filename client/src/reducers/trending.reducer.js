@@ -7,6 +7,6 @@ export default function trendingReducer(state = initialState, action) {
     case GET_TRENDS:
       return action.payload;
     default:
-      return state;
+      return state
   }
 }
