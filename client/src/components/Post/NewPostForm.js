@@ -162,4 +162,4 @@ const NewPostForm = () => {
   );
 };
 
-export default NewPostForm;;
+export default NewPostForm;
