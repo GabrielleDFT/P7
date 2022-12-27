@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { isEmpty } from '../Utils'
-import FollowHandler from './FollowHandler
+import FollowHandler from './FollowHandler'
 
 const FriendsHint = () => {
   const [isLoading, setIsLoading] = useState(true)
