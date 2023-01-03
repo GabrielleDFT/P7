@@ -66,7 +66,7 @@ module.exports.updatePost = (req, res) => {
   };
 
   PostModel.findOneAndUpdate(
-    req.params.id,
+    {_id: req.params.id},
     { $set: updatedRecord },
     { new: true },
     (err, docs) => {
@@ -76,14 +76,15 @@ module.exports.updatePost = (req, res) => {
   );
 };
 
-module.exports.deletePost = (req, res) => {
+module.exports.deletePost = async (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
-
-  PostModel.findByIdAndRemove(req.params.id, (err, docs) => {
-    if (!err) res.send(docs);
-    else console.log("Delete error : " + err);
-  });
+  try {
+    await PostModel.findOneAndDelete({_id: req.params.id});
+    return res.status(200).send({message: "Post suppimé"})
+  } catch (error) {
+    return res.statuq(400).send(error)
+  }
 };
 
 module.exports.likePost = async (req, res) => {
@@ -92,7 +93,7 @@ module.exports.likePost = async (req, res) => {
 
   try {
     await PostModel.findOneAndUpdate(
-      req.params.id,
+      {_id: req.params.id},
       {
         $addToSet: { likers: req.body.id },
       },
@@ -120,7 +121,7 @@ module.exports.unlikePost = async (req, res) => {
 
   try {
     await PostModel.findOneAndUpdate(
-      req.params.id,
+      {_id: req.params.id},
       {
         $pull: { likers: req.body.id },
       },
@@ -142,13 +143,13 @@ module.exports.unlikePost = async (req, res) => {
     }
 };
 
-module.exports.commentPost = (req, res) => {
+module.exports.commentPost = async (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
 
   try {
-    return PostModel.findOneAndUpdate(
-      req.params.id,
+    const data = await PostModel.findOneAndUpdate(
+      {_id: req.params.id},
       {
         $push: {
           comments: {
@@ -158,11 +159,9 @@ module.exports.commentPost = (req, res) => {
             timestamp: new Date().getTime(),
           },
         },
-      },
-      { new: true })
-            .then((data) => res.send(data))
-            .catch((err) => res.status(500).send({ message: err }));
-    } catch (err) {
+      })
+            return res.status(200).send(data)
+      } catch (err) {
         return res.status(400).send(err);
     }
 };
@@ -196,7 +195,7 @@ module.exports.deleteCommentPost = (req, res) => {
 
   try {
     return PostModel.findOneAndUpdate(
-      req.params.id,
+      {_id: req.params.id},
       {
         $pull: {
           comments: {
