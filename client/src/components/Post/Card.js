@@ -13,14 +13,11 @@ const Card = ({ post }) => {
   const [isUpdated, setIsUpdated] = useState(false);
   const [textUpdate, setTextUpdate] = useState(null);
   const [showComments, setShowComments] = useState(false);
+
    //--Récupération de la data Utilisateur & Autre-Utilisateur dans le store redux
   const usersData = useSelector((state) => state.usersReducer);
   const userData = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
-//--isAllowed vérifie le droit a la modification admin ou user--
-const isAllowed =
-userData && (userData._id === post.posterId || userData.admin === true);
-
 
   const updateItem = () => {
     if (textUpdate) {
@@ -100,16 +97,11 @@ userData && (userData._id === post.posterId || userData.admin === true);
                 title={post._id}
               ></iframe>
             )}
-             {/* isAllowed vérifie si la personne à les droits d'accès aux modification (utilisateur / admin) */}
-             {isAllowed && (
+             {(userData._id === post.posterId || userData.admin === true) && (
               <div className="button-container">
-                <button id="modify" onClick={() => setIsUpdated(!isUpdated)}>
-                  <img
-                    className="edit-delete"
-                    src="./img/editer.png"
-                    alt="Edit"
-                  />
-                </button>
+                <div onClick={() => setIsUpdated(!isUpdated)}>
+                  <img src="./img/icons/edit.svg" alt="edit" />
+                </div>
                 <DeleteCard id={post._id} />
               </div>
             )}
