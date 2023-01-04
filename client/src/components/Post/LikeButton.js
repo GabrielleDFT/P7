@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { UidContext } from "../AppContext";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
@@ -6,24 +6,23 @@ import { useDispatch } from "react-redux";
 import { likePost, unlikePost } from "../../actions/post.actions";
 
 const LikeButton = ({ post }) => {
-  const [liked, setLiked] = useState(false);
+  
   const uid = useContext(UidContext);
   const dispatch = useDispatch();
+  const [liked, setLiked] = useState(post.likers.includes(uid));
+  const [likes, setLikes] = useState(post.likers.length);
 
   const like = () => {
     dispatch(likePost(post._id, uid))
     setLiked(true);
+    setLikes(likes + 1)
   };
 
   const unlike = () => {
     dispatch(unlikePost(post._id, uid))
     setLiked(false);
+    setLikes(likes - 1)
   };
-
-  useEffect(() => {
-    if (post.likers.includes(uid)) setLiked(true);
-    else setLiked(false);
-  }, [uid, post.likers, liked]);
 
   return (
     <div className="like-container">
@@ -36,13 +35,13 @@ const LikeButton = ({ post }) => {
           <div>Connectez-vous pour aimer un post !</div>
         </Popup>
       )}
-      {uid && liked === false && (
+      { liked === false && (
         <img src="./img/icons/heart.svg" onClick={like} alt="like" />
       )}
-      {uid && liked && (
+      { liked && (
         <img src="./img/icons/heart-filled.svg" onClick={unlike} alt="unlike" />
       )}
-      <span>{post.likers.length}</span>
+      <span>{likes}</span>
     </div>
   );
 };
