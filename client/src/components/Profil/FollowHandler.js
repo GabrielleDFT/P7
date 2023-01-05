@@ -1,12 +1,18 @@
+/*Redux & React modules*/
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { followUser, unfollowUser } from "../../actions/user.actions";
+
+/*Actions*/
+import { followUser, unfollowUser } from "../../actions/user.actions";//ok
+
 import { isEmpty } from "../Utils";
 
-const FollowHandler = ({ idToFollow, type }) => {
+const FollowHandler = ({ idToFollow, type }) => {//Exports to the UpdateProfile and the Thread a FollowHandler component
+            //Data
   const userData = useSelector((state) => state.userReducer);
-  const [isFollowed, setIsFollowed] = useState(false);
   const dispatch = useDispatch();
+
+  const [isFollowed, setIsFollowed] = useState(false);
 
   const handleFollow = () => {
     dispatch(followUser(userData._id, idToFollow));
@@ -45,3 +51,4 @@ const FollowHandler = ({ idToFollow, type }) => {
 };
 
 export default FollowHandler;
+
