@@ -24,7 +24,7 @@ const Navbar = () => {
             <li></li>
             <li className="welcome">
               <NavLink to="/profil">
-                <h5>Hello {userData.pseudo} !</h5>
+                <h5>Bonjour {userData.pseudo} !</h5>
               </NavLink>
             </li>
             <Logout />
