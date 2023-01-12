@@ -42,7 +42,4 @@ module.exports.logout = (req, res) => {
   res.redirect('/');
 }
 
-module.exports.logout = (req, res) => {
-  res.cookie('jwt', '', { maxAge: 1 });
-  res.redirect('/');
-}
+
