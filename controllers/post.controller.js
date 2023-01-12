@@ -81,9 +81,9 @@ module.exports.deletePost = async (req, res) => {
     return res.status(400).send("ID unknown : " + req.params.id);
   try {
     await PostModel.findOneAndDelete({_id: req.params.id});
-    return res.status(200).send({message: "Post suppimé"})
+    return res.status(200).send({message: "Post supprimé"})
   } catch (error) {
-    return res.statuq(400).send(error)
+    return res.status(400).send(error)
   }
 };
 
