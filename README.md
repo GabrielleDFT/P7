@@ -15,9 +15,9 @@ Données de connexion sécurisées. L'application étant responsive.
 - Node.js 
 - Yarn
 
--backend : cd backend / puis "npm start"
+- backend : cd backend / puis "npm start"
 
--frontend : cd frontend / puis : "npm start"
+- frontend : cd frontend / puis : "npm start"
 Ensuite, le navigateur s'ouvrira à l'adresse suivante :  http://localhost:3000 
 
 
