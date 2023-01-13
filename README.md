@@ -7,8 +7,8 @@ Le but de cet outil est de faciliter les intéractions entre collègues et leur 
 Données de connexion sécurisées. L'application étant responsive.
 
 ## Technologies utilisées
-- **backend :** MongoDB & MongoDB Atlas/Compass, Express & Node js
-- **frontend :** React
+- **Backend :** MongoDB & MongoDB Atlas/Compass, Express & Node js
+- **Frontend :** React
 
 
 ![log5](https://user-images.githubusercontent.com/96197835/212316191-00851a2b-1a5c-46b4-9c93-c59118b01588.png)
