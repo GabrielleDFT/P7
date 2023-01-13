@@ -8,7 +8,7 @@
 - Bcrypt
 - Dotenv
 
-## Lancement de l'application : côté backend
+## Lancement de l'application : Backend
 - cd backend / puis npm start
 
 
