@@ -9,9 +9,9 @@
 - Redux
 
 ## Lancement de l'application  : côté frontend
-- cd frontend / puis : npm start
+- cd frontend / npm start
 
-Ensuite, le navigateur s'ouvrira à l'adresse suivante :  http://localhost:
+Le navigateur s'ouvrira à l'adresse suivante :  http://localhost:3000/
 
 
 
