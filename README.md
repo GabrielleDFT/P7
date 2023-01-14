@@ -8,12 +8,11 @@ Le but de cet outil étant de faciliter les intéractions entre collègues et le
 Pour la gestion du site :  Création d'un compte administrateur ayant la possibilité de modérer le contenu de l’application. 
 L’administrateur a les droits de modification & suppression sur tous les posts du réseau social. 
 
-
 L'application respecte la norme W.C.A.G (Web Content Accessibility Guidelines).
 Données de connexion sécurisées.
 Toute l'application étant responsive.
 
-## Frameworks & Bibliothèques utilisés
+## Frameworks & Bibliothèques
 ### Pour le Backend :
 - Node.js 
 - MongoDB
