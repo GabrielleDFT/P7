@@ -56,13 +56,13 @@ module.exports.follow = async (req, res) => {
     return res.status(400).send("ID unknown : " + req.params.id);
 
   try {
-    //--Add to the follower list--
+    //---Add to Followers list---
     await UserModel.findOneAndUpdate(
       {_id: req.params.id},
       { $addToSet: { following: req.body.idToFollow } }
       )
 
-      //--Add to following list--
+      //---Add to Following list---
       await UserModel.findOneAndUpdate(
         req.body.idToFollow,
         { $addToSet: { followers: req.params.id } })
@@ -86,7 +86,7 @@ module.exports.unfollow = async (req, res) => {
       {_id: req.params.id},
       { $pull: { following: req.body.idToUnfollow } })
 
-      //--Retirer de la liste des followers--
+      //---Remove to Followers list---
       await UserModel.findOneAndUpdate(
         req.body.idToUnfollow,
         { $pull: { followers: req.params.id } })
