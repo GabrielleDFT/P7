@@ -4,14 +4,8 @@
 ### Pré-requis
 - React
 - Yarn
-- Sass / Node-sass
-- Axios
-- Redux
 
-## Lancement de l'application : Frontend
-- cd frontend / npm start
-
-Le navigateur s'ouvrira à l'adresse suivante :  http://localhost:3000/
+![log5](https://user-images.githubusercontent.com/96197835/212493125-4432c47b-3526-4726-aa22-543e2b2cda22.png)
 
 
 
