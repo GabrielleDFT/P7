@@ -1,3 +1,5 @@
+//---------------------------------------CONNEXION A LA BDD MONGO_DB--------------------------------------------------
+
 const mongoose = require ("mongoose");
 
 mongoose
@@ -6,6 +8,8 @@ mongoose
         {
     useNewUrlParser: true,
     useUnifiedTopology : true,
+    // useCreateIndex : true,
+    // useFindAndModify: false,
         }
     )
     .then(() => console.log('Successfully Connected to MongoDB !'))
