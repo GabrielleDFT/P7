@@ -3,10 +3,10 @@ const fs = require("fs");
 const { uploadErrors } = require("../utils/errors.utils");
 const sharp = require("sharp");
 
-// Upload image profil utilisateur
+//---Upload image profil utilisateur---
 module.exports.uploadProfil = async (req, res) => {
   //console.log(req.file);
-  // Renomme le fichier avec extension .jpg
+  //---Renomme le fichier avec extension .jpg---
   const fileName = req.body.name +".jpg"; 
   try {
     if (
