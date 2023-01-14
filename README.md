@@ -13,15 +13,15 @@ L'application respecte la norme W.C.A.G (Web Content Accessibility Guidelines).
 Données de connexion sécurisées.
 Toute l'application étant responsive.
 
-### Frameworks & Bibliothèques utilisés
-#### Pour le Backend :
+## Frameworks & Bibliothèques utilisés
+### Pour le Backend :
 - Node.js 
 - MongoDB
 - Express
 - Bcrypt
 - Dotenv
 
-#### Pour le Frontend :
+### Pour le Frontend :
 - React
 - Yarn
 - Redux
