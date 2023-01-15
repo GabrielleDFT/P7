@@ -1,3 +1,4 @@
+![Capture d'écran_20230114_060804](https://user-images.githubusercontent.com/96197835/212523641-ee00d514-2b01-4959-a083-27451fc18940.png)
 # Groupomania
 
 ## Installation 
