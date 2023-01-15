@@ -2,7 +2,7 @@
 # Groupomania
 
 ## Le Projet
-Le projet consiste à construire une application, un réseau social interne pour les employé(e)s de Groupomania.
+Le projet consiste à construire une application Full-Stack : un réseau social interne pour les employé(e)s de Groupomania.
 
 Le but de cet outil étant de faciliter les intéractions entre collègues et leur permettant de poster une image, un texte et des commentaires.
 
@@ -28,10 +28,11 @@ Toute l'application étant responsive.
 - Axios
 
 ## Lancement de l'Application
-- 1. Dans le Terminal, tapez "npm install" pour installer le dossier node_modules : cd backend / npm i
-- 2. Mettre les données des variables d'environnement
-- 3. cd backend / npm start
-- 4. cd frontend / npm start
+- 1. Dans le Terminal, installez le dossier node_modules : cd backend / npm i
+- 2. Télécharger et se connecter à Mongo Compass avec les identifiants pour connexion à la base de données 
+- 3. Entrez les données des variables d'environnement (fichier .env dans backend/config/.env)
+- 4. cd backend / npm start
+- 5. cd frontend / npm start
 
 
 
