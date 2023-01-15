@@ -1,3 +1,5 @@
+//----------------------------------------GESTION AUTHENTIFICATION--------------------------------------------------
+
 const UserModel = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 const { signUpErrors, signInErrors } = require('../utils/errors.utils');
@@ -10,10 +12,11 @@ const createToken = (id) => {
   })
 };
 
+//---Inscription---
 module.exports.signUp = async (req, res) => {
   const {pseudo, email, password} = req.body
 
-  try {
+  try {//---Création d'un nouvel utilisateur---
     const user = await UserModel.create({pseudo, email, password });
     res.status(201).json({ user: user._id});
   }
