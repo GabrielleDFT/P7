@@ -28,9 +28,10 @@ Toute l'application étant responsive.
 - Axios
 
 ## Lancement de l'Application
-- 1. Tapez dans le Terminal "npm install" pour install toutes les dépendences & le dossier node_modules
-- 2. cd backend / npm start
-- 3. cd frontend / npm start
+- 1. Dans le Terminal, tapez "npm install" pour installer le dossier node_modules : cd backend / npm i
+- 2. Mettre les données des variables d'environnement
+- 3. cd backend / npm start
+- 4. cd frontend / npm start
 
 
 
