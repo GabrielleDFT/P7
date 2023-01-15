@@ -1,3 +1,4 @@
+![log5](https://user-images.githubusercontent.com/96197835/212493125-4432c47b-3526-4726-aa22-543e2b2cda22.png)
 # Groupomania
 
 ## Le Projet
@@ -30,7 +31,7 @@ Toute l'application étant responsive.
 - 1. Tapez dans le Terminal "npm install" pour install toutes les dépendences & le dossier node_modules
 - 2. cd backend / npm start
 - 3. cd frontend / npm start
-![log5](https://user-images.githubusercontent.com/96197835/212493125-4432c47b-3526-4726-aa22-543e2b2cda22.png)
+
 
 
 
