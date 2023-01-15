@@ -14,8 +14,15 @@
     margin: 58px 8px 50px;
   }
 
-  .main {
+ .main {
     margin-top: -8px;
+
+     /* ---MEDIA QUERIES : Logo page d'actualités/Trending--- */
+     @media screen and (max-width: 590px) {
+      img {
+        width: 400px;
+      }
+     }
   }
 
   .right-side {
