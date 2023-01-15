@@ -7,9 +7,10 @@ const cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/user.routes');
 const postRoutes = require('./routes/post.routes');
 
-//---Variables d'environnement---
+//---Variables d'environnement - Dotenv Library---
 require('dotenv').config({path: './config/.env'});
-require('./config/db');
+require('./config/db');//---Relié à MongoDB vi db.js---
+
 const {checkUser, requireAuth} = require('./middleware/auth.middleware');
 const cors = require('cors');
 
@@ -41,7 +42,7 @@ app.get('/jwtid', requireAuth, (req, res) => {
 app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);
 
-//---Ecoute du Server---
+//---Ecoute du Server sur le Port---
 app.listen(process.env.PORT, () => {
-  console.log(`Listening on port ${process.env.PORT}`);
+  console.log(`Succesfully Listening on Port ${process.env.PORT}`);
 })
