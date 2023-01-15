@@ -9,7 +9,7 @@ const uploadController = require('../controllers/upload.controller');
 const multer = require("multer");
 const upload = multer();
 
-//---Auth---
+//---Authentification---
 router.post("/register", authController.signUp);
 router.post("/login", authController.signIn);
 router.get("/logout", authController.logout);
