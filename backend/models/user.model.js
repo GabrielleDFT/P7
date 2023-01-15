@@ -1,7 +1,10 @@
 //----------------------------------------MODELE USERS + COMPTE ADMIN DANS MONGO_DB--------------------------------------------------
 
 const mongoose = require('mongoose');
+//---Bibliotheque Validator pr validation d'email - Fonction (renvoie true ou false) similaire à Regex, qui controle l'email
 const { isEmail } = require('validator');
+
+//---Bibliotheque Bcrypt pour crypter password
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema(
@@ -11,55 +14,55 @@ const userSchema = new mongoose.Schema(
       required: true,
       minLength: 3,
       maxLength: 55,
-      unique: true,
-      trim: true
+      unique: true,//---Nom unique---
+      trim: true //---Spprime les espaces---
     },
     email: {
       type: String,
       required: true,
-      validate: [isEmail],
+      validate: [isEmail],//---Validation/vérification précise de l'email---
       lowercase: true,
       unique: true,
       trim: true,
     },
-    password: {
+    password: {//---Le password sera crypté---
       type: String,
       required: true,
       max: 1024,
       minlength: 6
     },
-    picture: {
+    picture: {//---Photo de profil---
       type: String,
-      default: "./uploads/profil/random-user.png"
+      default: "./uploads/profil/random-user.png"//---Image par défault lors de la création d'un compte User---
     },
-    bio :{
+    bio :{//---Intitulé de poste---
       type: String,
       max: 1024,
     },
-    followers: {
+    followers: {//---Collègues qui suivent l'user---
       type: [String]
     },
-    following: {
+    following: {//---Collègues que l'user suit---
       type: [String]
     },
-    likes: {
+    likes: {//---Posts déjà likés par l'user & qu'il ne peut reliker (pas de likes à l'infini)---
       type: [String]
     },
-    /* ---Création du Compte Admin--- */
+    // ---Création Compte Administrateur---
     admin: {
       type: Boolean,
       default: false,
     },
   },
-  {
+  {//---A chaque fois que l'user va s'enregistrer---
     timestamps: true,
   }
 );
 
-//---Password hashé avec Bcrypt + Salt avant sauvegarde  dans MongoDB---
-userSchema.pre("save", async function(next) {
-  const salt = await bcrypt.genSalt();
-  this.password = await bcrypt.hash(this.password, salt);
+//---Password hashé avant sauvegarde dans MongoDB avec Bcrypt + Salt---
+userSchema.pre("save", async function(next) {//---Crypter le password avant d'enregistrer dans BDD---
+  const salt = await bcrypt.genSalt();//---Salage du password---
+  this.password = await bcrypt.hash(this.password, salt);//---Ajouter le salage au password---
   next();
 });
 
