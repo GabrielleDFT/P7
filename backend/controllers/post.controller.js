@@ -161,11 +161,11 @@ module.exports.commentPost = async (req, res) => {
       {_id: req.params.id},
       {
         $push: {//---Push du tableau "Comments" + ajoute un new comment à la BDD---
-          comments: {
+          comments: {//---Récuperation de la data du comment----
             commenterId: req.body.commenterId,
             commenterPseudo: req.body.commenterPseudo,
             text: req.body.text,
-            timestamp: new Date().getTime(),//---Incrémenter un timestamp---
+            timestamp: new Date().getTime(),//---Incrémenter un timestamp pr recuperer la date du comment---
           },
         },
       })
