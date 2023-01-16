@@ -1,3 +1,5 @@
+//----------------------------------------GESTION DES POSTS---------------------------------------
+
 const postModel = require("../models/post.model");
 const PostModel = require("../models/post.model");
 const UserModel = require("../models/user.model");
@@ -7,13 +9,15 @@ const fs = require("fs");
 const { promisify } = require("util");
 const sharp = require("sharp");
 
+//---Renvoi de la data ds BDD---
 module.exports.readPost = (req, res) => {
   PostModel.find((err, docs) => {
     if (!err) res.send(docs);
     else console.log("Error to get data : " + err);
-  }).sort({ createdAt: -1 });
+  }).sort({ createdAt: -1 });//ll
 };
 
+//---Créer des Posts---
 module.exports.createPost = async (req, res) => {
   let fileName;
 
@@ -40,18 +44,18 @@ module.exports.createPost = async (req, res) => {
       );
   }
 
-  const newPost = new postModel({
+    const newPost = new postModel({//---Incrémente le post model---
     posterId: req.body.posterId,
     message: req.body.message,
     picture: req.file !== null ? "./uploads/posts/" + fileName : "",
-    video: req.body.video,
+    video: req.body.video,//url de la video
     likers: [],
     comments: [],
   });
 
-  try {
+  try {//---Incrémenter notre data dans la BDD---
     const post = await newPost.save();
-    return res.status(201).json(post);
+    return res.status(201).json(post);//retourne le msg posté
   } catch (err) {
     return res.status(400).send(err);
   }
