@@ -14,7 +14,7 @@ module.exports.readPost = (req, res) => {
   PostModel.find((err, docs) => {
     if (!err) res.send(docs);
     else console.log("Error to get data : " + err);
-  }).sort({ createdAt: -1 });//---Trier les posts les plus récents au dessus (du + récent au + ancien)---
+  }).sort({ createdAt: -1 });//---Trier les posts les plus récents en hau (du + récent au + ancien)---
 };
 
 //---Créer des Posts---
@@ -160,7 +160,7 @@ module.exports.commentPost = async (req, res) => {
     const data = await PostModel.findOneAndUpdate(
       {_id: req.params.id},
       {
-        $push: {//---Push du tableau "Comments" + ajoute un new comment (objet) à la BDD---
+        $push: {//---Push du tableau "comments" + ajoute un new comment (objet) à la BDD---
           comments: {//---Récuperation de la data du comment----
             commenterId: req.body.commenterId,
             commenterPseudo: req.body.commenterPseudo,
@@ -175,6 +175,7 @@ module.exports.commentPost = async (req, res) => {
     }
 };
 
+//---Editer Commentaire sur Posts---
 module.exports.editCommentPost = (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
@@ -207,7 +208,7 @@ module.exports.deleteCommentPost = (req, res) => {
     return PostModel.findOneAndUpdate(
       {_id: req.params.id},
       {
-        $pull: {
+        $pull: {//---Retire le comment & son id---
           comments: {
             _id: req.body.commentId,
           },
