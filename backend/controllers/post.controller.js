@@ -87,6 +87,13 @@ module.exports.updatePost = (req, res) => {
 module.exports.deletePost = async (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
+  
+      let params = {_id: req.params.id }
+
+    if(!res.locals.user.admin){
+      params.posterId = res.locals.user._id
+  }
+  
   try {
     await PostModel.findOneAndDelete({_id: req.params.id});
     return res.status(200).send({message: "Post supprimé"})
