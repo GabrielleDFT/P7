@@ -16,6 +16,7 @@ const postRoutes = require('./routes/post.routes');
 require('dotenv').config({path: './config/.env'});
 require('./config/db');//---Relié à MongoDB viA db.js---
 
+//---Appel du Middlewared'Authentification---
 const {checkUser, requireAuth} = require('./middleware/auth.middleware');
 const cors = require('cors');
 
@@ -39,9 +40,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 //---Traitement des Cookies---
 app.use(cookieParser());
 
-//---Jwt : Token avec l'id user---
+//---Sécurité de la connexion de l'User - Check Token avec l'id User---
 app.get('*', checkUser);
-//---Middleware authentification à la connexion de l'user---
+
+//---Jwt - Middleware authentification à la connexion de l'User---
 app.get('/jwtid', requireAuth, (req, res) => {
   res.status(200).send(res.locals.user._id)
 });
