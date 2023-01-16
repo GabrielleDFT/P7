@@ -1,5 +1,6 @@
 //----------------------------------------GESTION DES ERREURS--------------------------------------------------
 
+//---SignUp Errors---
 module.exports.signUpErrors = (err) => {
   let errors = { pseudo: "", email: "", password: "" };
 
@@ -20,6 +21,7 @@ module.exports.signUpErrors = (err) => {
   return errors;
 };
 
+//---SignIn Errors---
 module.exports.signInErrors = (err) => {
   let errors = { email: '', password: ''}
 
@@ -32,6 +34,7 @@ module.exports.signInErrors = (err) => {
   return errors;
 }
 
+//---Upload Size Errors---
 module.exports.uploadErrors = (err) => {
   let errors = { format: '', maxSize: ""};
 
