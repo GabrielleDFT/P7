@@ -71,9 +71,15 @@ module.exports.updatePost = (req, res) => {
   const updatedRecord = {//---Enregistrement de la mise à jour---
     message: req.body.message,
   };
+    
+      let params = {_id: req.params.id }
 
+    if(!res.locals.user.admin){
+      params.posterId = res.locals.user._id
+  }
+  
   PostModel.findOneAndUpdate(
-    {_id: req.params.id},
+    {params},
     { $set: updatedRecord },//---Mise à jour du message de l'User---
     { new: true },
     (err, docs) => {
