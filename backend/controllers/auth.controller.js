@@ -8,7 +8,6 @@ const { signUpErrors, signInErrors } = require('../utils/errors.utils');
 
 //---Calcul du Temps/Durée de validité du Token : 3 journées---
 const maxAge = 3 * 24 * 60 * 60 * 1000;
-
 //---Fonction CreateToken---
 const createToken = (id) => {
   return jwt.sign({id}, process.env.TOKEN_SECRET, {
