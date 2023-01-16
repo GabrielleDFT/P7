@@ -30,7 +30,7 @@ module.exports.signUp = async (req, res) => {
   }
 }
 
-//---Gestion de la Connexion---
+//---Connexion---
 module.exports.signIn = async (req, res) => {
   const { email, password } = req.body
 
