@@ -50,8 +50,10 @@ const userSchema = new mongoose.Schema(
     },
     // ---Création Compte Administrateur---
     admin: {
-      type: Boolean,
+       type: Boolean,
       default: false,
+      // allowNull: false,
+      required: true
     },
   },
   {//---A chaque fois que l'user va s'enregistrer---
