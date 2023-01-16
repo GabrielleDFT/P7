@@ -61,17 +61,18 @@ module.exports.createPost = async (req, res) => {
   }
 };
 
+//--Mise à jour du Post---
 module.exports.updatePost = (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
 
-  const updatedRecord = {
+  const updatedRecord = {//---Enregistrement de la mise à jour---
     message: req.body.message,
   };
 
   PostModel.findOneAndUpdate(
     {_id: req.params.id},
-    { $set: updatedRecord },
+    { $set: updatedRecord },//---Mise à jour du message de l'User---
     { new: true },
     (err, docs) => {
       if (!err) res.send(docs);
@@ -80,6 +81,7 @@ module.exports.updatePost = (req, res) => {
   );
 };
 
+//---Suppression de Posts---
 module.exports.deletePost = async (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
@@ -91,15 +93,16 @@ module.exports.deletePost = async (req, res) => {
   }
 };
 
+//---Likes---
 module.exports.likePost = async (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
 
   try {
-    await PostModel.findOneAndUpdate(
+    await PostModel.findOneAndUpdate(//---Récupère le msg & son id--
       {_id: req.params.id},
       {
-        $addToSet: { likers: req.body.id },
+        $addToSet: { likers: req.body.id },//---addTSet : ajoute 1 donnée en + au tableau likers
       },
       { new: true })
       .then((data) => res.send(data))
@@ -119,6 +122,7 @@ module.exports.likePost = async (req, res) => {
     }
 };
 
+//---Unlikes---
 module.exports.unlikePost = async (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
@@ -127,7 +131,7 @@ module.exports.unlikePost = async (req, res) => {
     await PostModel.findOneAndUpdate(
       {_id: req.params.id},
       {
-        $pull: { likers: req.body.id },
+        $pull: { likers: req.body.id },//----pull : Retire du tableau des likes---
       },
       { new: true })
             .then((data) => res.send(data))
@@ -147,6 +151,7 @@ module.exports.unlikePost = async (req, res) => {
     }
 };
 
+//---Commentaires des Posts---
 module.exports.commentPost = async (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
@@ -155,12 +160,12 @@ module.exports.commentPost = async (req, res) => {
     const data = await PostModel.findOneAndUpdate(
       {_id: req.params.id},
       {
-        $push: {
+        $push: {//---Push du tableau "Comments" + ajoute un new comment à la BDD---
           comments: {
             commenterId: req.body.commenterId,
             commenterPseudo: req.body.commenterPseudo,
             text: req.body.text,
-            timestamp: new Date().getTime(),
+            timestamp: new Date().getTime(),//---Incrémenter un timestamp---
           },
         },
       })
@@ -193,6 +198,7 @@ module.exports.editCommentPost = (req, res) => {
   }
 };
 
+//---Suppression Commentaires des Posts---
 module.exports.deleteCommentPost = (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
