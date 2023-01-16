@@ -1,4 +1,4 @@
-//----------------------------------------GESTION ROUTES-----------------------------------------------
+//----------------------------------------GESTION ROUTES USERS-----------------------------------------------
 
 //---Module Router d'Express---
 const router = require("express").Router();
@@ -31,4 +31,5 @@ router.patch("/unfollow/:id", userController.unfollow);
 router.post("/upload", upload.single("file"), uploadController.uploadProfil);
 
 module.exports = router;
+
 
