@@ -23,7 +23,7 @@ module.exports.checkUser = (req, res, next) => {
   }
 };
 
-//---Controle si Token correspond à la BDD---
+//---Controle Authentification - si Token correspond à la BDD
 module.exports.requireAuth = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
