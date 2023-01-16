@@ -6,7 +6,7 @@ const UserModel = require("../models/user.model");
 const { uploadErrors } = require("../utils/errors.utils");
 const ObjectID = require("mongoose").Types.ObjectId;
 const fs = require("fs");
-const { promisify } = require("util");
+// const { promisify } = require("util");
 const sharp = require("sharp");
 
 //---Renvoi de la data ds BDD---
@@ -21,6 +21,7 @@ module.exports.readPost = (req, res) => {
 module.exports.createPost = async (req, res) => {
   let fileName;
 
+  //---Gestion des images---
   if (req.file ) {
     try {
       if (
@@ -47,6 +48,7 @@ module.exports.createPost = async (req, res) => {
     const newPost = new postModel({//---Incrémente le post model---
     posterId: req.body.posterId,
     message: req.body.message,
+    //---Incrémente le chemin des images ds la BDD---
     picture: req.file !== null ? "./uploads/posts/" + fileName : "",
     video: req.body.video,//url de la video
     likers: [],
