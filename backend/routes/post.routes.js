@@ -1,3 +1,5 @@
+//----------------------------------------GESTION ROUTES POSTS-----------------------------------------------
+
 const router = require('express').Router();
 //---Controller---
 const postController = require('../controllers/post.controller');
@@ -5,7 +7,7 @@ const postController = require('../controllers/post.controller');
 const multer = require("multer");
 const upload = multer();
 
-//---Routes Posts---
+//---Routes (CRUD) Posts---
 router.get('/', postController.readPost);
 router.post('/', upload.single("file"), postController.createPost);
 router.put('/:id', postController.updatePost);
