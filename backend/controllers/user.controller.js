@@ -2,7 +2,7 @@
 
 const UserModel = require("../models/user.model");
 
-//---Controler à chq fois que les id st reconnus par la BDD---
+//---Controler des id reconnus par la BDD---
 const ObjectID = require("mongoose").Types.ObjectId;
 
 //---Sélection des Infos de tous les Users (fonction déclarée dans user.routes)---
@@ -60,7 +60,7 @@ module.exports.deleteUser = async (req, res) => {
 module.exports.follow = async (req, res) => {
   if (
     !ObjectID.isValid(req.params.id) ||//Vérification id ou
-    !ObjectID.isValid(req.body.idToFollow)//Controle
+    !ObjectID.isValid(req.body.idToFollow)
   )
     return res.status(400).send("ID unknown : " + req.params.id);
 
