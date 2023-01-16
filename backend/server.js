@@ -2,14 +2,19 @@
 
 //---Frameworks---
 const express = require('express');
+
+//---Bibliotheque BodyParser permet lecture/traitement de la data---
 const bodyParser = require('body-parser');
+
+//---Bibliotheque pour Lire/Décoder un Cookie avec Node js---
 const cookieParser = require('cookie-parser');
+
 const userRoutes = require('./routes/user.routes');
 const postRoutes = require('./routes/post.routes');
 
 //---Variables d'environnement - Dotenv Library---
 require('dotenv').config({path: './config/.env'});
-require('./config/db');//---Relié à MongoDB via db.js---
+require('./config/db');//---Relié à MongoDB viA db.js---
 
 const {checkUser, requireAuth} = require('./middleware/auth.middleware');
 const cors = require('cors');
@@ -27,9 +32,11 @@ const corsOptions = {
 }
 app.use(cors(corsOptions));
 
-//---Traitement des Requêtes : BodyParser permet le traitement de la data---
+//---Traitement des Requêtes - Convertion JSON---
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+//---Traitement des Cookies---
 app.use(cookieParser());
 
 //---Jwt : Token avec l'id user---
