@@ -1,14 +1,18 @@
-//----------------------------------------GESTION AUTHENTIFICATION--------------------------------------------------
+//----------------------------------------GESTION AUTHENTIFICATION USER--------------------------------------------------
 
 const UserModel = require('../models/user.model');
+//---Bibliotheque Jwt---
 const jwt = require('jsonwebtoken');
+
 const { signUpErrors, signInErrors } = require('../utils/errors.utils');
 
+//---Calcul du Temps/Durée de validité du Token : 3 journées---
 const maxAge = 3 * 24 * 60 * 60 * 1000;
 
+//---Fonction CreateToken---
 const createToken = (id) => {
   return jwt.sign({id}, process.env.TOKEN_SECRET, {
-    expiresIn: maxAge
+    expiresIn: maxAge 
   })
 };
 
@@ -26,13 +30,16 @@ module.exports.signUp = async (req, res) => {
   }
 }
 
+//---Gestion de la Connexion---
 module.exports.signIn = async (req, res) => {
   const { email, password } = req.body
 
   try {
     const user = await UserModel.login(email, password);
+    //---Creation Token---
     const token = createToken(user._id);
     res.cookie('jwt', token, { httpOnly: true, maxAge});
+
     res.status(200).json({ user: user._id})
   } catch (err){
     const errors = signInErrors(err);
@@ -40,6 +47,7 @@ module.exports.signIn = async (req, res) => {
   }
 }
 
+//---Gestion de la Deconnexion---
 module.exports.logout = (req, res) => {
   res.cookie('jwt', '', { maxAge: 1 });
   res.redirect('/');
