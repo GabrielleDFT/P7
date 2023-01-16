@@ -9,7 +9,7 @@ const postRoutes = require('./routes/post.routes');
 
 //---Variables d'environnement - Dotenv Library---
 require('dotenv').config({path: './config/.env'});
-require('./config/db');//---Relié à MongoDB vi db.js---
+require('./config/db');//---Relié à MongoDB via db.js---
 
 const {checkUser, requireAuth} = require('./middleware/auth.middleware');
 const cors = require('cors');
@@ -27,13 +27,14 @@ const corsOptions = {
 }
 app.use(cors(corsOptions));
 
+//---Traitement des Requêtes : BodyParser permet le traitement de la data---
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 
-//---Jwt--Token avec l'id utilisateur---
+//---Jwt : Token avec l'id user---
 app.get('*', checkUser);
-//---Middleware authentification de l'utilisateur à la connexion--
+//---Middleware authentification à la connexion de l'user---
 app.get('/jwtid', requireAuth, (req, res) => {
   res.status(200).send(res.locals.user._id)
 });
