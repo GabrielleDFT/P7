@@ -8,6 +8,7 @@ const authController = require("../controllers/auth.controller");
 const userController = require("../controllers/user.controller");
 const uploadController = require('../controllers/upload.controller');
 
+//---Traitement des Images---
 const multer = require("multer");
 const upload = multer();
 
