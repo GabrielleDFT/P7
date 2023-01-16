@@ -23,6 +23,7 @@ const cors = require('cors');
 //---Création application Express---
 const app = express();
 
+//---CORS : Autorisation de Requêtes---
 const corsOptions = {
   origin: process.env.CLIENT_URL,
   credentials: true,
@@ -42,7 +43,6 @@ app.use(cookieParser());
 
 //---Sécurité de la connexion de l'User - Check Token avec l'id User---
 app.get('*', checkUser);
-
 //---Jwt - Middleware authentification à la connexion de l'User---
 app.get('/jwtid', requireAuth, (req, res) => {
   res.status(200).send(res.locals.user._id)
