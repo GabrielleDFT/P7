@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const PostSchema = new mongoose.Schema(
   {
-    posterId: {
+    posterId: {//---L'id de l'user qui poste---
       type: String,
       required: true
     },
@@ -19,12 +19,12 @@ const PostSchema = new mongoose.Schema(
     video: {
       type: String,
     },
-    likers: {
+    likers: {//---Users ayant liké le post---
       type: [String],
       required: true,
     },
     comments: {
-      type: [
+      type: [//---Data du commenter---
         {
           commenterId:String,
           commenterPseudo: String,
