@@ -4,8 +4,9 @@
 const router = require("express").Router();
 
 /*------------Middlewares*/
-const auth = require('../middlewares/auth.middleware') /*Calls the Auth middleware*/
-const multer = require('../middlewares/multer.middleware') /*Calls the Multer middleware*/
+const auth = require('../middleware/auth.middleware') /*Calls the Auth middleware*/
+const {checkUser, requireAuth} = require('../middleware/auth');
+const multer = require('../middleware/multer.middleware') /*Calls the Multer middleware*/
 
 //---Routes Controllers---
 const authController = require("../controllers/auth.controller");
