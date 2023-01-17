@@ -25,8 +25,8 @@ router.get("/logout", checkUser, authController.logout);
 //---Routes Users DB---
 router.get("/", userController.getAllUsers);
 router.get("/:id", userController.userInfo);
-router.put("/:id", userController.updateUser);
-router.delete("/:id", userController.deleteUser);
+router.put("/:id", checkUser, userController.updateUser);
+router.delete("/:id", checkUser, userController.deleteUser);
 
 //---Routes Follow & Unfollow---
 router.patch("/follow/:id",  checkUser, userController.follow);
