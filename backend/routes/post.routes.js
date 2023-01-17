@@ -4,6 +4,12 @@ const router = require('express').Router();
 //---Controller---
 const postController = require('../controllers/post.controller');
 
+/*------------Middlewares*/
+const auth = require('../middleware/auth.middleware') /*Calls the Auth middleware*/
+const {checkUser, requireAuth} = require('../middleware/auth');
+const multer = require('../middleware/multer.middleware') /*Calls the Multer middleware*/
+
+//---Traitement des Images---
 const multer = require("multer");
 const upload = multer();
 
