@@ -14,18 +14,18 @@ const multer = require("multer");
 const upload = multer();
 
 //---Routes (CRUD) Posts---
-router.get('/', requireAuth, postController.readPost);
-router.post('/', requireAuth, upload.single("file"), postController.createPost);
-router.put('/:id', requireAuth, postController.updatePost);
-router.delete('/:id', requireAuth, postController.deletePost);
+router.get('/', checkUser, postController.readPost);
+router.post('/', checkUser, upload.single("file"), postController.createPost);
+router.put('/:id', checkUser, postController.updatePost);
+router.delete('/:id', checkUser, postController.deletePost);
 
 //---Routes Likes & Unlikes---
-router.patch('/like-post/:id', requireAuth, postController.likePost);
-router.patch('/unlike-post/:id', requireAuth, postController.unlikePost);
+router.patch('/like-post/:id', checkUser, postController.likePost);
+router.patch('/unlike-post/:id', checkUser, postController.unlikePost);
 
 //---Routes Commentaires---
-router.patch('/comment-post/:id', requireAuth, postController.commentPost);
-router.patch('/edit-comment-post/:id', requireAuth, postController.editCommentPost);
-router.patch('/delete-comment-post/:id', requireAuth, postController.deleteCommentPost);
+router.patch('/comment-post/:id', checkUser, postController.commentPost);
+router.patch('/edit-comment-post/:id', checkUser, postController.editCommentPost);
+router.patch('/delete-comment-post/:id', checkUser, postController.deleteCommentPost);
 
 module.exports = router;
