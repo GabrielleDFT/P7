@@ -210,20 +210,20 @@ module.exports.deleteCommentPost = (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
 
-  try {
-    return PostModel.findOneAndUpdate(
-      {_id: req.params.id},
-      {
-        $pull: {//---Retire le comment & son id---
-          comments: {
-            _id: req.body.commentId,
-          },
-        },
-      },
-      { new: true })
-            .then((data) => res.send(data))
+        if (req.params.id === res.auth || res.admin === true) {
+          PostModel.findOneAndUpdate(
+            {_id: req.params.id},
+            {
+              $pull: {
+                comments: {
+                  _id: req.body.commentId,
+                },
+              },
+            })
+            .then(() => {res.status(200).json({message : "Commentaire supprimé"})})
             .catch((err) => res.status(500).send({ message: err }));
-    } catch (err) {
-        return res.status(400).send(err);
-    }
-};
+    
+          } else {
+            return res.status(403).json({ message: "Vous n'êtes pas authorisé à supprimer ce commentaire!"});
+          }
+        };
