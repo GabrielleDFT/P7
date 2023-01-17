@@ -63,7 +63,7 @@ module.exports.createPost = async (req, res) => {
 };
 
 //--Mise à jour du Post---
-exports.updatePost = (req, res, next) => {
+module.exports.updatePost = (req, res, next) => {
 
     const postObject = req.file ? {
         ...req.body,
@@ -84,7 +84,7 @@ exports.updatePost = (req, res, next) => {
     }
 
 //---Suppression de Posts---
-exports.deletePost = (req, res, next) => {
+module.exports.deletePost = (req, res, next) => {
     
     PostModel.findOne({ _id: req.params.id})
         .then((post) => {
@@ -98,7 +98,6 @@ exports.deletePost = (req, res, next) => {
         })
         .catch(error => res.status(500).json({ error }));
 };
-
 
 //---Likes---
 module.exports.likePost = async (req, res) => {
