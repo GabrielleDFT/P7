@@ -4,7 +4,7 @@ const router = require('express').Router();
 //---Controller---
 const postController = require('../controllers/post.controller');
 
-/*------------Middlewares*/
+//---Middleware---
 const auth = require('../middleware/auth.middleware') /*Calls the Auth middleware*/
 const {checkUser, requireAuth} = require('../middleware/auth');
 const multer = require('../middleware/multer.middleware') /*Calls the Multer middleware*/
