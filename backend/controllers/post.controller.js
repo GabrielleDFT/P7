@@ -63,51 +63,46 @@ module.exports.createPost = async (req, res) => {
 };
 
 //--Mise à jour du Post---
-module.exports.updatePost = (req, res) => {
-  if (!ObjectID.isValid(req.params.id))
-    return res.status(400).send("ID unknown : " + req.params.id);
-  
-     //---Vérification droits---
-      let params = {_id: req.params.id }
+exports.updatePost = (req, res, next) => {
 
-    if(!res.locals.user.admin){
-      params.posterId = res.locals.user._id
-  }
-  
-    const updatedRecord = {//---Enregistrement de la mise à jour---
-    message: req.body.message,
-  };
-  
-  PostModel.findOneAndUpdate(
-    {params},
-    { $set: updatedRecord },//---Mise à jour du message de l'User---
-    { new: true },
-    (err, docs) => {
-      if (!err) res.send(docs);
-      else console.log("Update error : " + err);
+    const postObject = req.file ? {
+        ...req.body,
+        imageUrl: `${req.file.filename}`
+    } : { ...req.body };
+
+    PostModel.findOne({ _id: req.params.id})
+        .then((post) => {
+            if (post.posterId === res.auth || res.admin === true) {
+                PostModel.findOneAndUpdate({ _id: req.params.id}, { ...postObject, _id: req.params.id})
+                .then(() => {res.status(200).json({message: "Post modifié !"})})
+                .catch(error => {res.status(400).json({ error })});
+            } else {
+                { res.status(401).json({message: "Vous n'êtes pas authorisé à modifier ce post!"})}
+            }
+        })
+        .catch(error => {res.status(400).json({ error })});
     }
-  );
-};
 
 //---Suppression de Posts---
-module.exports.deletePost = async (req, res) => {
-  if (!ObjectID.isValid(req.params.id))
-    return res.status(400).send("ID unknown : " + req.params.id);
-  
-      //---Vérification droits---
-      let params = {_id: req.params.id }
+exports.deletePost = (req, res, next) => {
 
-    if(!res.locals.user.admin){
-      params.posterId = res.locals.user._id
-  }
-  
-  try {
-    await PostModel.findOneAndDelete({_id: req.params.id});
-    return res.status(200).send({message: "Post supprimé"})
-  } catch (error) {
-    return res.status(400).send(error)
-  }
-};
+    const postObject = req.file ? {
+        ...req.body,
+        imageUrl: ${req.file.filename}
+    } : { ...req.body };
+
+    PostModel.findOne({ _id: req.params.id})
+        .then((post) => {
+            if (post.posterId === res.auth || res.admin === true) {
+                PostModel.findOneAndUpdate({ _id: req.params.id}, { ...postObject, _id: req.params.id})
+                .then(() => {res.status(200).json({message: "Post modifié !"})})
+                .catch(error => {res.status(400).json({ error })});
+            } else {
+                { res.status(403).json({message: "Vous n'êtes pas authorisé à modifier ce post!"})}
+            }
+        })
+        .catch(error => {res.status(400).json({ error })});
+    }
 
 //---Likes---
 module.exports.likePost = async (req, res) => {
