@@ -66,7 +66,8 @@ module.exports.createPost = async (req, res) => {
 module.exports.updatePost = (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
-    
+  
+     //---Vérification droits---
       let params = {_id: req.params.id }
 
     if(!res.locals.user.admin){
@@ -93,6 +94,7 @@ module.exports.deletePost = async (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
   
+      //---Vérification droits---
       let params = {_id: req.params.id }
 
     if(!res.locals.user.admin){
