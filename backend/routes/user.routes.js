@@ -18,19 +18,19 @@ const multer = require("multer");
 const upload = multer();
 
 //---Routes Authentification---
-router.post("/register", authController.signUp);
-router.post("/login", authController.signIn);
-router.get("/logout", authController.logout);
+router.post("/register", requireAuth, authController.signUp);
+router.post("/login", requireAuth, authController.signIn);
+router.get("/logout", requireAuth, authController.logout);
 
 //---Routes Users DB---
-router.get("/", userController.getAllUsers);
-router.get("/:id", userController.userInfo);
-router.put("/:id", userController.updateUser);
-router.delete("/:id", userController.deleteUser);
+router.get("/", requireAuth, userController.getAllUsers);
+router.get("/:id", requireAuth, userController.userInfo);
+router.put("/:id", requireAuth, userController.updateUser);
+router.delete("/:id", requireAuth, userController.deleteUser);
 
 //---Routes Follow & Unfollow---
-router.patch("/follow/:id", userController.follow);
-router.patch("/unfollow/:id", userController.unfollow);
+router.patch("/follow/:id",  requireAuth, userController.follow);
+router.patch("/unfollow/:id",  requireAuth, userController.unfollow);
 
 //---Route Upload---
 router.post("/upload", upload.single("file"), uploadController.uploadProfil);
