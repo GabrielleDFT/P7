@@ -6,7 +6,6 @@ const UserModel = require("../models/user.model");
 const { uploadErrors } = require("../utils/errors.utils");
 const ObjectID = require("mongoose").Types.ObjectId;
 const fs = require("fs");
-// const { promisify } = require("util");
 const sharp = require("sharp");
 
 //---Renvoi de la data ds BDD---
@@ -14,7 +13,7 @@ module.exports.readPost = (req, res) => {
   PostModel.find((err, docs) => {
     if (!err) res.send(docs);
     else console.log("Error to get data : " + err);
-  }).sort({ createdAt: -1 });//---Trier les posts les plus récents en hau (du + récent au + ancien)---
+  }).sort({ createdAt: -1 });//---Trier les posts les plus récents en haut (du + récent au + ancien)---
 };
 
 //---Créer des Posts---
