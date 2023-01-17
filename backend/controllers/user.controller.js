@@ -38,7 +38,7 @@ module.exports.updateUser = async (req, res) => {
         .catch((err) => res.status(500).send({ message: err }));
 
   } else {
-    return res.status(500).json({ message: err });
+    return res.status(403).json({ message: err });
   }
 };
 
@@ -60,7 +60,7 @@ module.exports.deleteUser = async (req, res) => {
         })
 
   } else {
-    return res.status(500).json({ message: err });
+    return res.status(403).json({ message: err });
   }
 })
 .catch(error => res.status(500).json({ error }));
