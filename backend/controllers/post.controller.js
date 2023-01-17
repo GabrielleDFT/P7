@@ -72,7 +72,7 @@ exports.updatePost = (req, res, next) => {
 
     PostModel.findOne({ _id: req.params.id})
         .then((post) => {
-            if (post.posterId === res.auth || res.admin === true) {
+            if (post.posterId === req.auth || req.admin === true) {
                 PostModel.findOneAndUpdate({ _id: req.params.id}, { ...postObject, _id: req.params.id})
                 .then(() => {res.status(200).json({message: "Post modifié !"})})
                 .catch(error => {res.status(400).json({ error })});
@@ -93,7 +93,7 @@ exports.deletePost = (req, res, next) => {
 
     PostModel.findOne({ _id: req.params.id})
         .then((post) => {
-            if (post.posterId === res.auth || res.admin === true) {
+            if (post.posterId === req.auth || req.admin === true) {
                 PostModel.findOneAndUpdate({ _id: req.params.id}, { ...postObject, _id: req.params.id})
                 .then(() => {res.status(200).json({message: "Post modifié !"})})
                 .catch(error => {res.status(400).json({ error })});
