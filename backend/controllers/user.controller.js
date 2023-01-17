@@ -27,7 +27,7 @@ module.exports.updateUser = async (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
 
-  if (req.params.id === res.auth || res.admin === true) {//---verification droits admin---
+  if (req.params.id === req.auth || req.admin === true) {//---verification droits admin---
 
     UserModel.findOneAndUpdate(
         { _id: req.params.id },
@@ -50,7 +50,7 @@ module.exports.deleteUser = async (req, res) => {
     UserModel.findOne({ _id: req.params.id })
     .then(user => {
 
-        if (req.params.id === res.auth || res.admin === true) {//---verification droits admin---
+        if (req.params.id === req.auth || req.admin === true) {//---verification droits admin---
 
         const filename = user.imageUrl.split('/uploads/profil/')[1]
         fs.unlink(`/uploads/profil/${filename}`, () => {
