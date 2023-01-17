@@ -3,6 +3,10 @@
 //---Module Router d'Express---
 const router = require("express").Router();
 
+/*------------Middlewares*/
+const auth = require('../middlewares/auth.middleware') /*Calls the Auth middleware*/
+const multer = require('../middlewares/multer.middleware') /*Calls the Multer middleware*/
+
 //---Routes Controllers---
 const authController = require("../controllers/auth.controller");
 const userController = require("../controllers/user.controller");
