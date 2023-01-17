@@ -88,7 +88,7 @@ module.exports.deletePost = (req, res, next) => {
     
     PostModel.findOne({ _id: req.params.id})
         .then((post) => {
-            if (post.posterId === req.auth || req.isadmin === true) {
+            if (post.posterId === req.auth || req.admin === true) {
             PostModel.findOneAndDelete({ _id: req.params.id })
                 .then(() => { res.status(200).json({message: "Post supprimé !"})})
                 .catch(error => res.status(401).json({ error }))
