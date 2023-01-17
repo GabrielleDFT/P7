@@ -13,14 +13,14 @@ module.exports.checkUser = (req, res, next) => {
         next();
       } else {
         let user = await UserModel.findById(decodedToken.id);
-        res.locals.user = user;
-       // res.auth = decodedToken.id;
-        // res.admin = user.admin;//check admin
+        req.locals.user = user;
+        res.auth = decodedToken.id;
+        res.admin = user.admin;//check admin
         next();
       }
     });
   } else {
-    res.locals.user = null;
+    req.locals.user = null;
     next();
   }
 };
