@@ -9,7 +9,7 @@ module.exports.checkUser = (req, res, next) => {
   if (token) {//---Vérification/Decoded Token---
     jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
       if (err) {
-        res.locals.user = null;
+        req.locals.user = null;
         next();
       } else {
         let user = await UserModel.findById(decodedToken.id);
