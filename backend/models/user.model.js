@@ -68,9 +68,10 @@ userSchema.pre("save", async function(next) {//---Crypter le password avant d'en
   next();
 });
 
+//---Au login : Recherche & Comparaison de la Data l'User---
 userSchema.statics.login = async function(email, password) {
   const user = await this.findOne({ email });
-  if (user) {
+  if (user) {//---Bcrypt fait une comparaison des cryptages Email avec Password----
     const auth = await bcrypt.compare(password, user.password);
     if (auth) {
       return user;
